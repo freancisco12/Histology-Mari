@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Histology Mari | Aulas de Medicina</title>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            teal: '#0D9488', // Medical Teal
+                            tealHover: '#0F766E',
+                            blue: '#2563EB',
+                            light: '#F8FAFC',
+                            dark: '#0F172A',
+                            text: '#334155'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8FAFC;
+            color: #334155;
+            overflow-x: hidden;
+        }
+
+        /* Accordion transition */
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-in-out;
+        }
+
+        .accordion-content.open {
+            max-height: 500px;
+        }
+        
+        .shadow-soft {
+            box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-teal selection:text-white">
+
+    <!-- NAVBAR HEADER -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-lg bg-brand-teal flex items-center justify-center text-white font-bold text-xl transition-transform group-hover:scale-105">
+                    <i class="fa-solid fa-microscope text-lg"></i>
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-xl font-extrabold tracking-tight text-brand-dark flex items-center gap-1">
+                        Histology <span class="text-brand-teal">Mari</span>
+                    </span>
+                    <span class="text-[10px] font-semibold tracking-wider text-slate-500 uppercase">Mentoria Médica</span>
+                </div>
+            </a>
+
+            <!-- Navigation Links (Desktop) -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
+                <a href="#sobre" class="hover:text-brand-teal transition-colors">Sobre a Mari</a>
+                <a href="#metodo" class="hover:text-brand-teal transition-colors">Metodologia</a>
+                <a href="#feedbacks" class="hover:text-brand-teal transition-colors">Feedbacks</a>
+                <a href="#faq" class="hover:text-brand-teal transition-colors">FAQ</a>
+                <!-- Hidden Admin Button -->
+                <button onclick="openAdmin()" class="text-slate-300 hover:text-brand-teal transition-colors ml-4" title="Área Administrativa">
+                    <i class="fa-solid fa-lock text-xs"></i>
+                </button>
+            </nav>
+
+            <!-- CTA Header Button -->
+            <button onclick="openModal()" class="hidden sm:inline-flex items-center gap-2 bg-brand-teal hover:bg-brand-tealHover text-white px-5 py-2.5 rounded-lg font-semibold text-sm transition-all shadow-md">
+                <span>Garantir Vaga</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="relative z-10 pt-20">
+
+        <!-- ============================================ -->
+        <!-- 1. HERO SECTION -->
+        <!-- ============================================ -->
+        <section class="relative bg-white pt-16 pb-20 md:pt-24 md:pb-28 border-b border-slate-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    
+                    <!-- Hero Left Content -->
+                    <div class="flex flex-col items-start space-y-6 text-left">
+                        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-teal-50 border border-teal-100 text-xs font-semibold text-brand-teal">
+                            <span class="flex h-2 w-2 rounded-full bg-brand-teal animate-ping"></span>
+                            <span>Vagas Abertas para Novas Turmas</span>
+                        </div>
+
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.15] text-brand-dark">
+                            Domine Histologia, Embriologia e Microbiologia
+                        </h1>
+
+                        <p class="text-lg sm:text-xl text-slate-600 font-normal leading-relaxed">
+                            Facilitando a sua vida na hora de realizar as provas da faculdade. Aulas didáticas, foco no que realmente importa e suporte para você alcançar suas melhores notas.
+                        </p>
+
+                        <div class="pt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto">
+                            <button onclick="openModal()" class="flex items-center justify-center gap-3 bg-brand-teal hover:bg-brand-tealHover text-white text-base font-bold px-8 py-4 rounded-xl shadow-lg shadow-teal-900/20 transition-all hover:-translate-y-0.5">
+                                <i class="fa-solid fa-stethoscope"></i>
+                                <span>Quero Estudar com a Mari</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Hero Right Visual -->
+                    <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-slate-200">
+                        <a href="https://postimages.org/" target="_blank"><img src="https://i.postimg.cc/mkqj2hBt/Captura-de-tela-2026-11-09-163418.png" alt="Captura-de-tela-2026-11-09-163418"></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================ -->
+        <!-- 2. SOBRE A MARIANA -->
+        <!-- ============================================ -->
+        <section id="sobre" class="py-20 bg-slate-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    
+                    <!-- Imagem Mariana -->
+                    <div class="relative order-2 lg:order-1">
+                        <div class="absolute inset-0 bg-brand-teal rounded-2xl transform -rotate-3 scale-105 opacity-20"></div>
+                        <a href='https://postimages.org/' target='_blank'><img src='https://i.postimg.cc/nzSgBFnJ/Captura-de-tela-2026-11-09-170429.png' border='0' alt='Captura-de-tela-2026-11-09-170429'></a>
+
+                    <!-- Texto Sobre -->
+                    <div class="order-1 lg:order-2 space-y-6">
+                        <span class="text-sm font-bold tracking-widest text-brand-teal uppercase">Conheça sua Mentora</span>
+                        <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-dark tracking-tight">
+                            Quem é a Mariana Correa?
+                        </h2>
+                        
+                        <div class="space-y-4 text-slate-600 leading-relaxed">
+                            <p>
+                                Mariana Correa é natural do município de Tacuru e atualmente é estudante de medicina na Universidad Sudamericana, localizada em Pedro Juan Caballero, no Paraguai.
+                            </p>
+                            <p>
+                                Ela sempre se dedicou intensamente aos estudos médicos e percebeu que poderia transformar o seu próprio método de aprendizado em algo que ajudasse outros alunos. Hoje, ela preza em distribuir esse conhecimento através de aulas extremamente didáticas e resumos visuais que descomplicam o ciclo básico.
+                            </p>
+                            <p class="font-medium text-brand-dark p-4 bg-white rounded-lg border-l-4 border-brand-teal shadow-sm">
+                                <i class="fa-solid fa-trophy text-amber-500 mr-2"></i>
+                                Destaque no evento <strong>MedHack</strong>, conquistando as primeiras colocações com as melhores apresentações de tema, evidenciando sua paixão por inovação e excelência médica.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================ -->
+        <!-- 3. METODOLOGIA / DORES E SOLUÇÕES -->
+        <!-- ============================================ -->
+        <section id="metodo" class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-dark tracking-tight">
+                        Como as aulas ajudam a superar a dificuldade?
+                    </h2>
+                    <p class="text-slate-600 text-base mt-4">
+                        Matérias densas e identificação de lâminas não precisam ser um bicho de sete cabeças. O método foca na visualização e raciocínio lógico.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    <!-- Text Features -->
+                    <div class="space-y-8">
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 rounded-full bg-teal-100 text-brand-teal flex items-center justify-center text-xl shrink-0">
+                                <i class="fa-solid fa-chalkboard-user"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-brand-dark mb-2">Aulas Didáticas e Visuais</h3>
+                                <p class="text-slate-600">Explicações claras usando lousas digitais e mapas mentais. Você entende o "porquê" ao invés de apenas decorar os tecidos.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 rounded-full bg-teal-100 text-brand-teal flex items-center justify-center text-xl shrink-0">
+                                <i class="fa-solid fa-microscope"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-brand-dark mb-2">Descomplicando Lâminas</h3>
+                                <p class="text-slate-600">Treinamento específico para provas práticas. Aprenda a bater o olho no microscópio ou atlas e identificar estruturas epiteliais e conjuntivas rapidamente.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 rounded-full bg-teal-100 text-brand-teal flex items-center justify-center text-xl shrink-0">
+                                <i class="fa-solid fa-headset"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-brand-dark mb-2">Acompanhamento EAD</h3>
+                                <p class="text-slate-600">Aulas ao vivo ou em grupo, com espaço para tirar dúvidas. O foco é facilitar sua vida na semana de provas.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Images context -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <a href="https://postimg.cc/JHVj3Dh7" target="_blank"><img src="https://i.postimg.cc/nrMTJqbm/Captura-de-tela-2026-11-09-163300.png" alt="Captura-de-tela-2026-11-09-163300"></a>
+                       <a href="https://postimg.cc/Mf210MG6" target="_blank"><img src="https://i.postimg.cc/prykHKbF/Captura-de-tela-2026-11-09-163254.png" alt="Captura-de-tela-2026-11-09-163254"></a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ============================================ -->
+        <!-- 4. FEEDBACKS / PROVA SOCIAL -->
+        <!-- ============================================ -->
+        <section id="feedbacks" class="py-20 bg-slate-50 border-y border-slate-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-sm font-bold tracking-widest text-brand-teal uppercase">Mensagens Reais</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-dark mt-2 tracking-tight">
+                        O que os alunos dizem?
+                    </h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+                    
+                    <!-- Feedback 1 -->
+                    <div class="bg-white p-4 rounded-2xl shadow-soft border border-slate-100 transform transition hover:-translate-y-1">
+                        <a href="https://postimg.cc/Pvs1bpqj" target="_blank"><img src="https://i.postimg.cc/BbtN029X/Captura-de-tela-2026-11-09-163213.png" alt="Captura-de-tela-2026-11-09-163213"></a>
+                        <div class="mt-4 p-2 text-center">
+                            <p class="text-slate-700 italic font-medium">"Você faz a histologia ser um pouco melhor."</p>
+                        </div>
+                    </div>
+
+                    <!-- Feedback 2 -->
+                    <div class="bg-white p-4 rounded-2xl shadow-soft border border-slate-100 transform transition hover:-translate-y-1">
+                        <a href="https://postimages.org/" target="_blank"><img src="https://i.postimg.cc/RhqGBw5W/Captura-de-tela-2026-11-09-163225.png" alt="Captura-de-tela-2026-11-09-163225"></a>
+                        <div class="mt-4 p-2 text-center">
+                            <p class="text-slate-700 italic font-medium">"Mas enfim vou focar no meu 10 de embriologia graças a melhor monitora do mundo."</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ============================================ -->
+        <!-- 5. FAQ (PERGUNTAS FREQUENTES) -->
+        <!-- ============================================ -->
+        <section id="faq" class="py-20 bg-white">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-extrabold text-brand-dark tracking-tight">
+                        Dúvidas Frequentes
+                    </h2>
+                </div>
+
+                <div class="space-y-4">
+                    
+                    <div class="bg-slate-50 rounded-xl border border-slate-200 overflow-hidden">
+                        <button onclick="toggleAccordion(this)" class="w-full p-6 text-left flex items-center justify-between font-semibold text-brand-dark hover:text-brand-teal transition-colors">
+                            <span>Como funciona o atendimento EAD?</span>
+                            <i class="fa-solid fa-chevron-down text-brand-teal transition-transform duration-300"></i>
+                        </button>
+                        <div class="accordion-content px-6 pb-6 text-slate-600 text-sm">
+                            As aulas são realizadas por videochamada (Google Meet ou Zoom), podendo ser sessões particulares ou em pequenos grupos. A Mariana utiliza lousa digital e atlas para explicação em tempo real.
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-50 rounded-xl border border-slate-200 overflow-hidden">
+                        <button onclick="toggleAccordion(this)" class="w-full p-6 text-left flex items-center justify-between font-semibold text-brand-dark hover:text-brand-teal transition-colors">
+                            <span>As aulas são focadas na Universidad Sudamericana?</span>
+                            <i class="fa-solid fa-chevron-down text-brand-teal transition-transform duration-300"></i>
+                        </button>
+                        <div class="accordion-content px-6 pb-6 text-slate-600 text-sm">
+                            Embora a Mariana estude na Sudamericana e conheça profundamente a grade local, as disciplinas do ciclo básico (Histologia, Embriologia, Microbiologia) são universais. O conteúdo ajuda alunos de diversas faculdades de medicina.
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-50 rounded-xl border border-slate-200 overflow-hidden">
+                        <button onclick="toggleAccordion(this)" class="w-full p-6 text-left flex items-center justify-between font-semibold text-brand-dark hover:text-brand-teal transition-colors">
+                            <span>Como faço para marcar uma aula?</span>
+                            <i class="fa-solid fa-chevron-down text-brand-teal transition-transform duration-300"></i>
+                        </button>
+                        <div class="accordion-content px-6 pb-6 text-slate-600 text-sm">
+                            Basta clicar em "Garantir Vaga" ou entrar em contato diretamente pelo nosso WhatsApp para verificar a disponibilidade de agenda da semana.
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ============================================ -->
+    <!-- 6. RODAPÉ E CONTATO -->
+    <!-- ============================================ -->
+    <footer class="bg-brand-dark pt-16 pb-8 text-slate-400">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                
+                <!-- Logo & Descrição -->
+                <div class="space-y-4">
+                    <a href="#" class="flex items-center gap-2">
+                        <div class="w-8 h-8 rounded bg-brand-teal flex items-center justify-center text-white font-bold text-sm">
+                            <i class="fa-solid fa-microscope"></i>
+                        </div>
+                        <span class="text-xl font-bold text-white">Histology <span class="text-brand-teal">Mari</span></span>
+                    </a>
+                    <p class="text-sm text-slate-400">
+                        Simplificando a Histologia, Embriologia e Microbiologia para futuros médicos.
+                    </p>
+                </div>
+
+                <!-- Contatos -->
+                <div>
+                    <h4 class="text-white font-bold mb-4">Contato Direto</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li class="flex items-center gap-2">
+                            <i class="fa-brands fa-whatsapp text-brand-teal text-lg"></i>
+                            <a href="#" class="hover:text-white transition-colors">+55 11 99999-9999</a>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-envelope text-brand-teal text-lg"></i>
+                            <a href="mailto:contato@histologymari.com.br" class="hover:text-white transition-colors">contato@histologymari.com.br</a>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa-brands fa-instagram text-brand-teal text-lg"></i>
+                            <a href="https://www.instagram.com/histology_mari" target="_blank" class="hover:text-white transition-colors">@histology_mari</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Links Rápidos -->
+                <div>
+                    <h4 class="text-white font-bold mb-4">Links Rápidos</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#sobre" class="hover:text-white transition-colors">Quem é a Mariana</a></li>
+                        <li><a href="#metodo" class="hover:text-white transition-colors">Metodologia</a></li>
+                        <li><a href="#feedbacks" class="hover:text-white transition-colors">Depoimentos</a></li>
+                        <li><a href="#faq" class="hover:text-white transition-colors">FAQ</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="pt-8 border-t border-slate-800 text-center text-xs">
+                <p>&copy; 2026 Histology Mari. Todos os direitos reservados. Feito para facilitar sua faculdade de Medicina.</p>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- ============================================ -->
+    <!-- MODAL DE CAPTURA DE LEADS -->
+    <!-- ============================================ -->
+    <div id="ctaModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300">
+        <div class="bg-white max-w-md w-full rounded-2xl p-6 sm:p-8 relative shadow-2xl transform scale-95 transition-transform duration-300" id="modalContainer">
+            
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 text-lg w-8 h-8 rounded-lg flex items-center justify-center bg-slate-100">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="text-center mb-6">
+                <div class="w-12 h-12 rounded-xl bg-teal-50 text-brand-teal flex items-center justify-center text-xl mx-auto mb-3">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <h3 class="text-xl font-bold text-brand-dark">Fale com a Mari</h3>
+                <p class="text-slate-500 text-sm mt-1">Preencha seus dados para receber as informações de aulas e horários disponíveis no WhatsApp.</p>
+            </div>
+
+            <form id="leadForm" onsubmit="handleFormSubmit(event)" class="space-y-4">
+                <div>
+                    <input type="text" required placeholder="Seu Nome Completo" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-sm text-brand-dark focus:outline-none focus:border-brand-teal focus:ring-1 focus:ring-brand-teal transition-all">
+                </div>
+                <div>
+                    <input type="tel" required placeholder="WhatsApp (com DDD)" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-sm text-brand-dark focus:outline-none focus:border-brand-teal focus:ring-1 focus:ring-brand-teal transition-all">
+                </div>
+                <div>
+                    <select class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-sm text-slate-600 focus:outline-none focus:border-brand-teal focus:ring-1 focus:ring-brand-teal transition-all">
+                        <option value="">Matéria de Interesse</option>
+                        <option>Histologia / Histopatologia</option>
+                        <option>Embriologia</option>
+                        <option>Microbiologia</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="w-full bg-brand-teal hover:bg-brand-tealHover text-white font-bold py-3.5 rounded-lg shadow-md text-sm transition-all flex items-center justify-center gap-2 mt-2">
+                    <span>Enviar Mensagem</span>
+                    <i class="fa-brands fa-whatsapp text-lg"></i>
+                </button>
+            </form>
+
+            <div id="modalSuccess" class="hidden text-center py-6 space-y-4">
+                <div class="w-16 h-16 rounded-full bg-teal-100 text-brand-teal flex items-center justify-center text-3xl mx-auto">
+                    <i class="fa-solid fa-check"></i>
+                </div>
+                <h4 class="text-xl font-bold text-brand-dark">Tudo Certo!</h4>
+                <p class="text-sm text-slate-500">
+                    A Mariana entrará em contato via WhatsApp com os detalhes.
+                </p>
+                <button onclick="closeModal()" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold py-2.5 rounded-lg text-sm transition-colors">
+                    Fechar Janela
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- MODAL DO PAINEL ADMIN (SIMULADO) -->
+    <!-- ============================================ -->
+    <div id="adminModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/80 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300">
+        <div class="bg-brand-dark max-w-sm w-full rounded-xl p-6 relative border border-slate-700 shadow-2xl transform scale-95 transition-transform duration-300" id="adminContainer">
+            <button onclick="closeAdmin()" class="absolute top-4 right-4 text-slate-400 hover:text-white">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            
+            <div class="text-center mb-6 pt-2">
+                <i class="fa-solid fa-lock text-brand-teal text-3xl mb-3"></i>
+                <h3 class="text-lg font-bold text-white">Acesso Restrito</h3>
+                <p class="text-slate-400 text-xs">Área administrativa da Mariana</p>
+            </div>
+
+            <form class="space-y-4" onsubmit="event.preventDefault(); document.getElementById('adminError').classList.remove('hidden');">
+                <input type="password" placeholder="Senha de Acesso" class="w-full bg-slate-800 border border-slate-600 rounded px-4 py-2 text-sm text-white focus:outline-none focus:border-brand-teal">
+                
+                <p id="adminError" class="text-red-400 text-xs text-center hidden">Acesso negado. Senha incorreta.</p>
+
+                <button type="submit" class="w-full bg-brand-teal hover:bg-brand-tealHover text-white font-bold py-2 rounded text-sm transition-all">
+                    Entrar no Painel
+                </button>
+            </form>
+        </div>
+    </div>
+
+
+    <script>
+        // Accordion Toggle
+        function toggleAccordion(button) {
+            const content = button.nextElementSibling;
+            const icon = button.querySelector('.fa-chevron-down');
+            const isOpen = content.classList.contains('open');
+            
+            document.querySelectorAll('.accordion-content').forEach(item => item.classList.remove('open'));
+            document.querySelectorAll('.fa-chevron-down').forEach(i => i.style.transform = 'rotate(0deg)');
+
+            if (!isOpen) {
+                content.classList.add('open');
+                if (icon) icon.style.transform = 'rotate(180deg)';
+            }
+        }
+
+        // Main CTA Modal
+        function openModal() {
+            const modal = document.getElementById('ctaModal');
+            const container = document.getElementById('modalContainer');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                container.classList.remove('scale-95');
+            }, 10);
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('ctaModal');
+            const container = document.getElementById('modalContainer');
+            modal.classList.add('opacity-0');
+            container.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                document.getElementById('leadForm').classList.remove('hidden');
+                document.getElementById('modalSuccess').classList.add('hidden');
+            }, 300);
+        }
+
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            document.getElementById('leadForm').classList.add('hidden');
+            document.getElementById('modalSuccess').classList.remove('hidden');
+        }
+
+        // Admin Modal (Substitui o alert())
+        function openAdmin() {
+            const modal = document.getElementById('adminModal');
+            const container = document.getElementById('adminContainer');
+            document.getElementById('adminError').classList.add('hidden'); // reset error
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                container.classList.remove('scale-95');
+            }, 10);
+        }
+
+        function closeAdmin() {
+            const modal = document.getElementById('adminModal');
+            const container = document.getElementById('adminContainer');
+            modal.classList.add('opacity-0');
+            container.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        // Close modals on outside click
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('ctaModal')) closeModal();
+            if (event.target == document.getElementById('adminModal')) closeAdmin();
+        }
+    </script>
+</body>
+</html>

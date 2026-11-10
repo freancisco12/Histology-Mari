@@ -1,0 +1,6 @@
+{
+  "name": "Histology Mari - Aulas de Medicina",
+  "description": "Plataforma e mentoria de Histologia, Embriologia e Microbiologia para estudantes de Medicina com Mariana Correa.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
